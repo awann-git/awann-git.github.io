@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meme Generator</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #111; color: #fff; }
+    .container { max-width: 600px; margin: 0 auto; padding: 1rem; }
+    .editor { background: #222; padding: 1rem; border-radius: 10px; }
+    canvas { max-width: 100%; border-radius: 10px; margin-bottom: 1rem; background: #000; }
+    input[type="text"] { width: 100%; margin-bottom: 0.5rem; padding: 0.5rem; }
+    input[type="color"] { margin-right: 1rem; }
+    select, button { padding: 0.5rem; margin-top: 0.5rem; }
+    .controls { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+    label { display: flex; align-items: center; gap: 0.5rem; }
+    .text-input { margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+	  <div class="container">
+    <h1>Meme Generator</h1>
+    <div class="editor">
+      <input type="file" id="imgUpload" accept="image/*" />
+      <canvas id="memeCanvas" width="500" height="500"></canvas><div id="textInputs">
+    <!-- dynamic text inputs -->
+  </div>
+
+  <button onclick="addTextField()">Add Text</button>
+
+  <div class="controls">
+    <button onclick="downloadMeme()">Download</button>
+  </div>
+</div>
+
+  </div>  <script>
+    const canvas = document.getElementById('memeCanvas');
+    const ctx = canvas.getContext('2d');
+    const imgUpload = document.getElementById('imgUpload');
+    const textInputsContainer = document.getElementById('textInputs');
+    let image = new Image();
+    let texts = [];
+    let draggingIndex = null;
+
+    function addTextField() {
+      const index = texts.length;
+      texts.push({
+        text: '',
+        x: 250,
+        y: 50 + index * 40,
+        color: '#ffffff',
+        size: 36,
+        font: 'Impact',
+        stroke: '#000000',
+        opacity: 1
+      });
+      const div = document.createElement('div');
+      div.classList.add('text-input');
+      div.innerHTML = `
+        <input type="text" placeholder="Enter Text" data-index="${index}" class="text-field">
+        <label>Size: <input type="range" data-index="${index}" class="size-field" value="36"></label>
+        <label>Color: <input type="color" data-index="${index}" class="color-field" value="#ffffff" />
+        Stroke: <input type="color" data-index="${index}" class="stroke-field" value="#000000"></label>
+        <label>Opacity: <input type="range" data-index="${index}" class="opacity-field" min="0" max="1" step="0.1" value="1" />
+<div class="controls">
+    <label>Font:
+      <select id="fontFamily">
+        <option value="Impact">Impact</option>
+        <option value="Arial">Arial</option>
+        <option value="Comic Sans MS">Comic Sans</option>
+      `;
+      textInputsContainer.appendChild(div);
+
+      updateListeners();
+      drawMeme();
+    }
+    
+    function updateListeners() {
+      document.querySelectorAll('.text-field').forEach(input => {
+        input.addEventListener('input', e => {
+          const i = e.target.dataset.index;
+          texts[i].text = e.target.value;
+          drawMeme();
+        });
+      });
+      document.querySelectorAll('.color-field').forEach(input => {
+        input.addEventListener('input', e => {
+          const i = e.target.dataset.index;
+          texts[i].color = e.target.value;
+          drawMeme();
+        });
+      });
+      
+      document.querySelectorAll('.stroke-field').forEach(input => {
+        input.addEventListener('input', e => {
+          const i = e.target.dataset.index;
+          texts[i].stroke = e.target.value;
+          drawMeme();
+        });
+      });
+      document.querySelectorAll('.opacity-field').forEach(input => {
+        input.addEventListener('input', e => {
+          const i = e.target.dataset.index;
+          texts[i].opacity = e.target.value;
+          drawMeme();
+        });
+      });
+
+      document.querySelectorAll('.size-field').forEach(input => {
+        input.addEventListener('input', e => {
+          const i = e.target.dataset.index;
+          texts[i].size = parseInt(e.target.value);
+          drawMeme();
+        });
+      });
+    }
+
+    function drawMeme() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.globalAlpha = 1;
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      ctx.textAlign = 'center';
+      ctx.lineWidth = 2;
+
+      texts.forEach(t => {
+        ctx.font = `${t.size}px ${t.font}`;
+        ctx.fillStyle = t.color;
+        ctx.strokeStyle = t.stroke;
+        ctx.globalAlpha = t.opacity;
+        ctx.fillText(t.text, t.x, t.y);
+        ctx.strokeText(t.text, t.x, t.y);
+      });
+    }
+
+    canvas.addEventListener('mousedown', e => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      for (let i = texts.length - 1; i >= 0; i--) {
+        const t = texts[i];
+        ctx.font = `${t.size}px ${t.font}`;
+        const metrics = ctx.measureText(t.text);
+        const width = metrics.width;
+        const height = t.size;
+        if (x >= t.x - width / 2 && x <= t.x + width / 2 && y >= t.y - height && y <= t.y) {
+          draggingIndex = i;
+          break;
+        }
+      }
+    });
+
+    canvas.addEventListener('mousemove', e => {
+      if (draggingIndex !== null) {
+        const rect = canvas.getBoundingClientRect();
+        texts[draggingIndex].x = e.clientX - rect.left;
+        texts[draggingIndex].y = e.clientY - rect.top;
+        drawMeme();
+      }
+    });
+
+    canvas.addEventListener('mouseup', () => {
+      draggingIndex = null;
+    });
+
+    imgUpload.addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        image.src = reader.result;
+        image.onload = drawMeme;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function downloadMeme() {
+      const link = document.createElement('a');
+      link.download = 'meme.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    }
+
+    // Inisialisasi awal satu teks
+    addTextField();
+</script></body>
+</html>
