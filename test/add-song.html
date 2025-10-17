@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tambah Lagu JKT48</title>
+  <style>
+    body { font-family: Arial; max-width: 500px; margin: 40px auto; background: #f7f7f7; padding: 20px; border-radius: 10px; }
+    input, button { width: 100%; margin: 10px 0; padding: 10px; font-size: 16px; }
+    button { background: #d63384; color: white; border: none; cursor: pointer; }
+    button:hover { background: #b12c6e; }
+  </style>
+</head>
+<body>
+  <h2>Tambah Lagu JKT48</h2>
+  <form id="songForm">
+    <input id="title" placeholder="Judul Lagu" required />
+    <input id="album" placeholder="Album" required />
+    <input id="release" placeholder="Tahun Rilis" required />
+    <input id="composer" placeholder="Composer" />
+    <input id="lyrics" placeholder="Penulis Lirik" />
+    <button type="submit">Simpan</button>
+  </form>
+  <script src="js/add.js"></script>
+</body>
+</html>
