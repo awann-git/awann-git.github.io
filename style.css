@@ -1,0 +1,161 @@
+.body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #d6eff4;
+}
+.navbar{
+    background: #fa211a;
+    margin: 0;
+    padding: 15px 35px;
+    position: relative; 
+    z-index: 1000;
+    
+}
+ 
+.logo{
+    font-size: 18pt;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+}
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main{
+
+    padding: 20px 35px;
+
+}
+ 
+.tombol{
+    display: none;
+    color: white;
+    font-size: 16pt;			
+}
+
+.mypage{
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+ 
+.tombol:hover{
+    cursor: pointer;
+}
+ 
+.menu{
+    margin: 0;
+    display: flex;
+    list-style: none;
+    padding: 0;			
+}
+ 
+.menu li{
+    padding-left: 0;
+    margin-right: 8px;
+}
+ 
+.menu li a{
+    padding:10px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-block;
+}
+
+.footer{
+    background: #212121;
+    color: white;
+    margin: 0;
+    padding: 15px 35px;
+    position: relative; 
+    z-index: 1000;
+    display: grid;
+}
+
+.footer-menu{
+    margin: 0;
+    list-style: none;
+    padding: 15px 0;
+    gap: 20px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.footer-menu li{
+    padding-left: 0;
+    margin-bottom: 6px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 10px;   
+}
+.social-links a:link,
+.social-links a:visited,
+.social-links a:active,
+.social-links a:focus {
+    color: white;
+    text-decoration: none;
+    outline: none;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.098);
+    border-radius: 50%;
+    transition: all 0.3s;
+    font-size: 12px;
+    color: white;
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    background-color: #fa211a;
+    transform: translateY(-3px);
+}
+
+/* PERBAIKAN: CSS Carousel dipindahkan keluar dari media query */
+
+
+
+@media screen and (max-width: 768px) {
+    .menu {
+        display: none;
+    }
+ 
+    .menu.aktif{
+        display:block;
+        position: absolute;
+        top: 100%;
+        background: #fa211a;
+        padding: 10px 20px;
+        right: 0;
+        left: 0;
+        z-index: 1000;
+    }
+ 
+    .menu.aktif li {
+        margin: 10px 0;
+    }
+ 
+    .menu.aktif li a{
+        padding: 10px;
+        display: block !important;
+        width: 100%;
+    }
+ 
+    .tombol {
+        display: block;
+    }
+}    
