@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tempat Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-tachometer-alt"></i>
+            <h2>Dashboard</h2>
+        </div>
+        <div class="sidebar-menu">
+            <ul>
+                <li><a href="#" class="active"><i class="fas fa-home"></i> <span>Beranda</span></a></li>
+                <li><a href="#"><i class="fas fa-file-alt"></i> <span>Semua Konten</span></a></li>
+                <li><a href="#"><i class="fas fa-edit"></i> <span>Buat Baru</span></a></li>
+                <li><a href="#"><i class="fas fa-inbox"></i> <span>Draft</span></a></li>
+                <li><a href="#"><i class="fas fa-trash"></i> <span>Terhapus</span></a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> <span>Pengaturan</span></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <h1>Tempat Admin</h1>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-cards">
+            <div class="stat-card">
+                <div class="stat-icon published">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>24</h3>
+                    <p>Konten Dipublikasi</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon draft">
+                    <i class="fas fa-edit"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>8</h3>
+                    <p>Konten Draft</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Table -->
+        <div class="content-section">
+            <div class="section-header">
+                <h2>Daftar Konten Terbaru</h2>
+                <button class="btn btn-primary" id="addContentBtn">
+                    <i class="fas fa-plus"></i> Konten Baru
+                </button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Judul</th>
+                        <th>Kategori</th>
+                        <th>Tanggal</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Panduan Lengkap SEO 2023</td>
+                        <td>Marketing</td>
+                        <td>15 Okt 2023</td>
+                        <td><span class="status published">Published</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <div class="action-btn edit-btn" data-id="1">
+                                    <i class="fas fa-edit"></i>
+                                </div>
+                                <div class="action-btn delete-btn" data-id="1">
+                                    <i class="fas fa-trash"></i>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tips Meningkatkan Konversi Website</td>
+                        <td>Bisnis</td>
+                        <td>12 Okt 2023</td>
+                        <td><span class="status published">Published</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <div class="action-btn edit-btn" data-id="2">
+                                    <i class="fas fa-edit"></i>
+                                </div>
+                                <div class="action-btn delete-btn" data-id="2">
+                                    <i class="fas fa-trash"></i>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Review Produk Terbaru Kami</td>
+                        <td>Produk</td>
+                        <td>10 Okt 2023</td>
+                        <td><span class="status draft">Draft</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <div class="action-btn edit-btn" data-id="3">
+                                    <i class="fas fa-edit"></i>
+                                </div>
+                                <div class="action-btn delete-btn" data-id="3">
+                                    <i class="fas fa-trash"></i>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Webinar Digital Marketing Gratis</td>
+                        <td>Event</td>
+                        <td>08 Okt 2023</td>
+                        <td><span class="status published">Published</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <div class="action-btn edit-btn" data-id="4">
+                                    <i class="fas fa-edit"></i>
+                                </div>
+                                <div class="action-btn delete-btn" data-id="4">
+                                    <i class="fas fa-trash"></i>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Draft Content -->
+        <div class="content-section">
+            <div class="section-header">
+                <h2>Konten Draft</h2>
+                <button class="btn btn-outline">
+                    <i class="fas fa-eye"></i> Lihat Semua
+                </button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Judul</th>
+                        <th>Kategori</th>
+                        <th>Terakhir Diubah</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Panduan Memulai Bisnis Online</td>
+                        <td>Bisnis</td>
+                        <td>14 Okt 2023</td>
+                        <td>
+                            <div class="action-buttons">
+                                <div class="action-btn edit-btn" data-id="5">
+                                    <i class="fas fa-edit"></i>
+                                </div>
+                                <div class="action-btn delete-btn" data-id="5">
+                                    <i class="fas fa-trash"></i>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Case Study Klien Sukses</td>
+                        <td>Studi Kasus</td>
+                        <td>11 Okt 2023</td>
+                        <td>
+                            <div class="action-buttons">
+                                <div class="action-btn edit-btn" data-id="6">
+                                    <i class="fas fa-edit"></i>
+                                </div>
+                                <div class="action-btn delete-btn" data-id="6">
+                                    <i class="fas fa-trash"></i>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal for Add/Edit Content -->
+    <div class="modal" id="contentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Tambah Konten Baru</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="contentForm">
+                    <div class="form-group">
+                        <label for="contentTitle">Judul Konten</label>
+                        <input type="text" id="contentTitle" class="form-control" placeholder="Masukkan judul konten">
+                    </div>
+                    <div class="form-group">
+                        <label for="contentCategory">Kategori</label>
+                        <select id="contentCategory" class="form-control">
+                            <option value="">Pilih Kategori</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Bisnis">Bisnis</option>
+                            <option value="Produk">Produk</option>
+                            <option value="Event">Event</option>
+                            <option value="Studi Kasus">Studi Kasus</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="contentStatus">Status</label>
+                        <select id="contentStatus" class="form-control">
+                            <option value="published">Published</option>
+                            <option value="draft">Draft</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="contentBody">Isi Konten</label>
+                        <textarea id="contentBody" class="form-control" placeholder="Tulis isi konten di sini..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelBtn">Batal</button>
+                <button class="btn btn-primary" id="saveBtn">Simpan</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="app.js"></script>
+  </script>
+</body>
+</html>
