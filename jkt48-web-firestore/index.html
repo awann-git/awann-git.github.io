@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daftar Lagu JKT48</title>
+  <style>
+    body { font-family: Arial; max-width: 600px; margin: 40px auto; background: #fff; padding: 20px; border-radius: 10px; }
+    h1 { text-align: center; color: #d63384; }
+    .song { border-bottom: 1px solid #ddd; padding: 10px 0; }
+    .song:last-child { border: none; }
+    a { display: block; text-align: center; margin-top: 20px; color: #d63384; text-decoration: none; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Daftar Lagu JKT48</h1>
+  <div id="songs"></div>
+  <a href="add-song.html">+ Tambah Lagu</a>
+
+  <script>
+    async function loadSongs() {
+      const res = await fetch("/api/songs");
+      const data = await res.json();
+
+      const list = document.getElementById("songs");
+      list.innerHTML = data
+        .map(
+          (s) => `
+          <div class="song">
+            <strong>${s.title}</strong> (${s.release})<br>
+            Album: ${s.album}<br>
+            Composer: ${s.composer || "-"}<br>
+            Lirik: ${s.lyrics || "-"}
+          </div>`
+        )
+        .join("");
+    }
+
+    loadSongs();
+  </script>
+</body>
+</html>
